@@ -27,8 +27,9 @@ angular.module('workspaceApp')
         success(function(data) {
           $cookieStore.put('token', data.token);
           currentUser = User.get();
-          deferred.resolve(data);
-          return cb();
+          currentUser.$promise.then(function() {
+            deferred.resolve(data);
+          });
         }).
         error(function(err) {
           this.logout();
@@ -135,7 +136,7 @@ angular.module('workspaceApp')
       isAdmin: function() {
         return currentUser.role === 'admin';
       },
-
+      
       /**
        * Get auth token
        */

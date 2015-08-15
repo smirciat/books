@@ -70,6 +70,7 @@ function setTokenCookie(req, res) {
   res.redirect('/');
 }
 
+
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
 exports.signToken = signToken;

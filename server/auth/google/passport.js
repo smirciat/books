@@ -8,6 +8,7 @@ exports.setup = function (User, config) {
       callbackURL: config.google.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
+      console.log(accessToken + " Fuck you Google! " + profile);
       User.findOne({
         'google.id': profile.id
       }, function(err, user) {
@@ -16,7 +17,7 @@ exports.setup = function (User, config) {
             name: profile.displayName,
             email: profile.emails[0].value,
             role: 'user',
-            username: profile.username,
+            username: profile.emails[0].value.split('@')[0],
             provider: 'google',
             google: profile._json
           });

@@ -19,7 +19,11 @@ exports.index = function(req, res) {
     return res.status(200).json(things);
   });
 };
+exports.key = function(req, res) {
 
+    return res.status(200).json(process.env.BOOKS_API_KEY);
+
+};
 // Get a single thing
 exports.show = function(req, res) {
   Thing.findById(req.params.id, function (err, thing) {
