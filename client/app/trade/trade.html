@@ -1,4 +1,20 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="col-md-12">
-This is the trade view.
+<div class="text-center"><h1>Select one of your books and one belonging to another person to initiate a trade.</h1></div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+      <h3 class="page-header">My Books:</h3>
+      <ul class="nav nav-tabs nav-stacked col-xs-6 col-sm-3 col-md-2" ng-repeat="book in filteredBooks" ng-controller="InnerCtrl">
+        <li><div class="text-center"><a href="#"><book-img book-object="book"></book-img>
+        <button ng-class="mineSelected[$index] ? 'btn btn-success': 'btn btn-danger'" ng-click="selectMine(book, $index)">{{label(mineSelected[$index])}}</button></a></div></li>
+      </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+      <h3 class="page-header">Other Users' Books:</h3>
+      <ul class="nav nav-tabs nav-stacked col-xs-6 col-sm-3 col-md-2" ng-repeat="book in otherBooks" ng-controller="InnerCtrl">
+        <li><div class="text-center"><a href="#"><book-img book-object="book"></book-img>
+        <button ng-class="notMineSelected[$index] ? 'btn btn-success': 'btn btn-danger'" ng-click="selectNotMine(book, $index)">{{label(notMineSelected[$index])}}</button></a></div></li>
+      </ul>
+    </div>
 </div>

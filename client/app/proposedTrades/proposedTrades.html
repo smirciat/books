@@ -1,0 +1,45 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class ="text-center"><h1>Pending Trades</h1></div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+      <h3 class="page-header">Trades Awaiting My Approval:</h3>
+      <div class="row" >
+        <div class="text-center" ng-repeat="trade in otherTrades">
+            <div class="col-xs-6 col-sm-3 col-md-2">
+              <div class="trade1">  
+                Receive:<book-img book-object="{imageUrl: trade.myBookUrl, title: trade.myBookTitle}"></book-img>
+                <button class="btn btn-success" ng-click="accept(trade)">Accept</button>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2">
+              <div class="trade2">    
+                Give:<book-img book-object="{imageUrl: trade.otherBookUrl, title: trade.otherBookTitle}"></book-img>
+                <button class="btn btn-danger" ng-click="reject(trade)">Reject</button>
+              </div>
+            </div>
+          </div>  
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+      <h3 class="page-header">Trades Awaiting Other Users' Approval:</h3>
+      <div class="row" >
+        <div class="text-center" ng-repeat="trade in myTrades">
+            <div class="col-md-2">
+              <div class="trade1">  
+                Receive:<book-img book-object="{imageUrl: trade.otherBookUrl, title: trade.otherBookTitle}"></book-img>
+                
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="trade2">    
+                Give:<book-img book-object="{imageUrl: trade.myBookUrl, title: trade.myBookTitle}"></book-img>
+                <button class="btn btn-danger" ng-click="reject(trade)">Cancel Trade Offer</button>
+              </div>
+            </div>
+          </div>  
+      </div>
+    </div>
+</div>
+

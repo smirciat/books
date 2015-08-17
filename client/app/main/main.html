@@ -1,23 +1,23 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<header class="hero-unit" id="banner" ng-hide="isLoggedIn()">
+<header class="hero-unit" id="banner" ng-hide="isLoggedIn">
   <div class="container">
     <h1>Book Trading Club</h1>
     <p class="lead">Login to manage your book collection, and trade with others!</p>
     <img src="assets/images/logo.png" alt="I'm Yeoman">
   </div>
 </header>
-<div class="container" ng-show="isLoggedIn()">
+<div class="container" ng-show="isLoggedIn">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 text-center">
       <h1 class="page-header">My Books:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-2" ng-repeat="book in filteredBooks">
+      <ul class="nav nav-tabs nav-stacked col-xs-6 col-sm-3 col-md-2" ng-repeat="book in filteredBooks">
         <li><a href="#"><book-img book-object="book"></book-img><button type="button" class="close" ng-click="deleteBook(book)">&times;</button></a></li>
       </ul>
     </div>
   </div>
 
   <form class="thing-form">
-    <label>Book Title</label>
+    <label>Additional Book Title</label>
     <p class="input-group">
       <input type="text" class="form-control" placeholder="Add a new book or isbn here." ng-model="newBook">
       <span class="input-group-btn">

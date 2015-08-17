@@ -1,5 +1,5 @@
 'use strict';
-
+var _ = require('lodash');
 var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
@@ -79,6 +79,19 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
+exports.updateName = function(req, res) {
+  
+  User.findById(req.params.id, function (err, user) {
+    if (err) { return res.status(500).send(err); }
+    if(!user) { return res.status(404).send('Not Found'); }
+    var name = {name: req.body.name}
+    var updated = _.extend(user, name);
+    updated.save(function (err) {
+      if (err) { return res.status(500).send(err); }
+      return res.status(200).json(user);
+    });
+  });
+};
 /**
  * Get my info
  */

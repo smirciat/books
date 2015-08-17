@@ -1,0 +1,14 @@
+.trade2{
+    background-color:lightgray;
+     margin-left: 0px !important;
+     margin-right: 10px !important;
+}
+.trade1{
+    background-color:lightgray;
+    margin-left: 10px !important;
+     margin-right: 0px !important;
+}
+.col-md-2{
+    padding:0;
+    margin: 0;
+}

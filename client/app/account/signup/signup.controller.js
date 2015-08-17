@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  .controller('SignupCtrl', function ($scope, Auth, $location, $window, otherUser) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -16,7 +16,9 @@ angular.module('workspaceApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          
+            $location.path('/');
+          
         })
         .catch( function(err) {
           err = err.data;

@@ -9,14 +9,21 @@ angular.module('workspaceApp')
       {
       'title': 'Trade',
       'link': '/trade'
-    }
+    },
+    {
+      'title': 'Pending Trades',
+      'link': '/proposedTrades'
+    },
     ];
-
+    $scope.currentUser = Auth.getCurrentUser().name;
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
-
+    Auth.isLoggedInAsync(function(loggedIn){
+      $scope.currentUser = Auth.getCurrentUser().name;
+    });
+    
+    
     $scope.logout = function() {
       Auth.logout();
       $location.path('/login');

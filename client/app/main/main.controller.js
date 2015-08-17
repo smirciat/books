@@ -1,27 +1,44 @@
 'use strict';
 
 angular.module('workspaceApp')
-  .controller('MainCtrl', function ($scope, $http, socket, Auth, $window, $location) {
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.all=false;
-    var mine = function(book){
+  .controller('MainCtrl', function ($scope, $http, socket, Auth, $window, $location, otherUser) {
+    
+    var init = function(){
+      console.log(Auth.getCurrentUser()._id);
+      $scope.all=false;
+      var mine = function(book){
         if ($scope.all) return true;
         else return (Auth.getCurrentUser()._id===book.ownerId);
-    };
-    $http.get('/api/books').success(function(books) {
-      $scope.books = books;//.filter(mine);
-      socket.syncUpdates('book', $scope.books, function(event, item, array){
-        $scope.filteredBooks=array.filter(mine);
+      };
+      $http.get('/api/books').success(function(books) {
+        $scope.books = books;//.filter(mine);
+        socket.syncUpdates('book', $scope.books, function(event, item, array){
+          $scope.filteredBooks=array.filter(mine);
+        });
+        $scope.filteredBooks=$scope.books.filter(mine);
       });
-      $scope.filteredBooks=$scope.books.filter(mine);
+      $scope.count = 0;
+    };
+    $scope.loggedIn=false;
+    Auth.isLoggedInAsync(function(loggedIn){
+      $scope.isLoggedIn=loggedIn;
+      //if (loggedIn) otherUser.init().then(function(){
+        init();
+      //});
     });
-    $scope.count = 0;
+    //$scope.isLoggedIn = Auth.isLoggedIn;
+    //if ($scope.isLoggedIn()) {
+    //  otherUser.init().then(function(){
+    //      init();
+    //    });
+    //}
+      
     $scope.addBook = function() {
       if($scope.newBook === '') {
         alert('Please Enter Something!');
         return;
       }
-      if(!$scope.isLoggedIn()) {
+      if(!$scope.isLoggedIn) {
         alert('Please Log In to Add a Book!');
         return;
       }
